@@ -1,27 +1,4 @@
-import { useEffect, useState } from 'react';
-
 export default function Home() {
-  const [coins, setCoins] = useState([]);
-
-  // Create floating coins
-  useEffect(() => {
-    const coinCount = 8;
-    const tempCoins = [];
-    for (let i = 0; i < coinCount; i++) {
-      tempCoins.push({
-        id: i,
-        style: {
-          position: 'absolute',
-          top: Math.random() * 80 + 'vh',
-          left: Math.random() * 90 + 'vw',
-          fontSize: Math.random() * 3 + 2 + 'rem',
-          animation: `float ${Math.random() * 5 + 5}s ease-in-out infinite`,
-        },
-      });
-    }
-    setCoins(tempCoins);
-  }, []);
-
   return (
     <div
       style={{
@@ -35,27 +12,19 @@ export default function Home() {
         background: 'linear-gradient(135deg, #6A0DAD, #FFD700)',
         color: 'white',
         fontFamily: 'Arial, sans-serif',
-        overflow: 'hidden',
-        position: 'relative',
       }}
     >
-      {/* Floating coins */}
-      {coins.map((coin) => (
-        <div key={coin.id} style={coin.style}>
-          🪙
-        </div>
-      ))}
-
-      {/* Hero */}
-      <h1 style={{
-        fontSize: '3rem',
-        fontWeight: 'bold',
-        marginBottom: '1rem',
-        animation: 'pulse 2s infinite',
-      }}>
+      <h1
+        style={{
+          fontSize: '3rem',
+          fontWeight: 'bold',
+          marginBottom: '1rem',
+          animation: 'pulse 2s infinite',
+        }}
+      >
         BoukiCoin: Rise Again with $BOUKI
       </h1>
-      <p style={{ fontSize: '1.5rem', marginBottom: '2rem', animation: 'fadeIn 3s ease-in' }}>
+      <p style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>
         Website coming soon…
       </p>
       <a
@@ -71,62 +40,71 @@ export default function Home() {
           borderRadius: '12px',
           textDecoration: 'none',
           transition: 'transform 0.3s',
-          zIndex: 10
         }}
-        onMouseEnter={e => e.target.style.transform = 'scale(1.1)'}
-        onMouseLeave={e => e.target.style.transform = 'scale(1)'}
+        onMouseEnter={(e) => (e.target.style.transform = 'scale(1.1)')}
+        onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
       >
         Buy $BOUKI
       </a>
 
-      {/* Hero image placeholder */}
+      {/* Rotating BoukiCoin */}
+      <div
+        style={{
+          marginTop: '2rem',
+          width: '150px',
+          height: '150px',
+          borderRadius: '50%',
+          background: 'url(/boukicoin.png) no-repeat center/contain',
+          animation: 'spin 5s linear infinite',
+        }}
+      ></div>
+
+      {/* Hero image */}
       <div
         style={{
           marginTop: '3rem',
           width: '400px',
           height: '200px',
-          backgroundColor: 'rgba(255,255,255,0.2)',
+          background: 'url(/Bouki never dies.png) no-repeat center/cover',
           borderRadius: '20px',
-          position: 'relative',
-          zIndex: 5,
         }}
-      >
-        <p style={{ paddingTop: '80px', color: 'white' }}>Hero image here</p>
-      </div>
+      ></div>
 
-      {/* Pump.fun live stats placeholder */}
-      <div
-        style={{
-          marginTop: '2rem',
-          padding: '1rem',
-          backgroundColor: 'rgba(255,255,255,0.15)',
-          borderRadius: '12px',
-          width: '80%',
-          maxWidth: '600px',
-        }}
-      >
-        <p>Price: -- SOL</p>
-        <p>Market Cap: -- SOL</p>
-        <p>Holders: --</p>
+      {/* X feed placeholder */}
+      <div style={{ marginTop: '2rem', width: '500px', maxWidth: '90%' }}>
+        <a
+          className="twitter-timeline"
+          href="https://x.com/BoukiWolof"
+          data-width="500"
+          data-height="400"
+        >
+          Tweets by BoukiWolof
+        </a>
       </div>
 
       <style jsx>{`
         @keyframes pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-          100% { transform: scale(1); }
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+          100% {
+            transform: scale(1);
+          }
         }
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(15deg); }
-          100% { transform: translateY(0) rotate(0deg); }
-        }
-        @keyframes fadeIn {
-          0% { opacity: 0; }
-          100% { opacity: 1; }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
+
+      <script async src="https://platform.twitter.com/widgets.js"></script>
     </div>
   );
 }
-
